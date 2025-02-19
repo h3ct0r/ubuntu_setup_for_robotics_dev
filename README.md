@@ -1,4 +1,6 @@
-# ubuntu_setup_for_robotics_dev
+# Ubuntu 22.04 setup for robotics development
+# Tested with: DELL G15 5530
+
 This repo is a group of commands and configurations focused for preparing a fresh Ubuntu installation for robotics and ROS2 development
 
 # install updates and reboot
@@ -14,7 +16,9 @@ sudo reboot now
 
 # install basic tools
 
+```
 sudo apt install -y vim cmake build-essential snapd arandr caffeine gparted nautilus-admin git htop ffmpeg keepass2 simplescreenrecorder locate virtualbox gimp inkscape meshlab nmap wireshark handbrake tree openssh-server
+```
 
 # install vscode
 
