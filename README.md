@@ -1,52 +1,22 @@
 # ubuntu_setup_for_robotics_dev
 This repo is a group of commands and configurations focused for preparing a fresh Ubuntu installation for robotics and ROS2 development
 
-
-
-
 # install updates and reboot
 
-sudo apt update
-sudo apt upgrade
-sudo apt dist-upgrade
-sudo apt autoremove
-sudo apt autoclean
+```
+sudo apt update & sudo apt upgrade
+sudo apt autoremove & sudo apt autoclean
 sudo fwupdmgr get-devices
 sudo fwupdmgr get-updates
 sudo fwupdmgr update
 sudo reboot now
-
-# set hybrid graphics
-
-sudo system76-power graphics hybrid
-sudo reboot now
+```
 
 # install basic tools
 
+sudo apt install -y vim cmake build-essential snapd arandr caffeine gparted nautilus-admin git htop ffmpeg keepass2 simplescreenrecorder locate virtualbox gimp inkscape meshlab nmap wireshark handbrake tree openssh-server
 
-sudo apt install -y vim
-sudo apt install -y snapd
-sudo apt install -y arandr
-sudo apt install -y caffeine
-sudo apt install -y gparted
-sudo apt install -y gnome-tweak-tool 
-sudo apt install -y nautilus-admin
-sudo apt install -y git
-sudo apt install -y code
-sudo apt install -y htop
-sudo apt install -y ffmpeg
-sudo apt install -y keepass2
-sudo apt install -y simplescreenrecorder
-sudo apt install -y locate
-sudo apt install -y virtualbox
-sudo apt install -y gimp
-sudo apt install -y inkscape
-sudo apt install -y meshlab
-sudo apt install -y wireshark
-sudo apt install -y handbrake
-sudo apt install -y tree
-sudo apt install -y openssh-server
-
+# install vscode
 
 # install and tweak terminator
 
