@@ -3,18 +3,24 @@
 
 This repo is a group of commands and configurations focused for preparing a fresh Ubuntu installation for robotics and ROS2 development
 
+# Update kernel and Nvidia drivers
+
+```
 sudo add-apt-repository ppa:damentz/liquorix -y
 sudo apt-get install linux-image-liquorix-amd64 linux-headers-liquorix-amd64 -y
-
-
+```
+```
 curl -fSsL https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/3bf863cc.pub | sudo gpg --dearmor | sudo tee /usr/share/keyrings/nvidia-drivers.gpg > /dev/null 2>&1
 sudo apt install build-essential gcc dirmngr ca-certificates software-properties-common apt-transport-https dkms curl -y
 echo 'deb [signed-by=/usr/share/keyrings/nvidia-drivers.gpg] https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/ /' | sudo tee /etc/apt/sources.list.d/nvidia-drivers.list
 sudo apt update
+```
 
+```
 sudo apt purge *nvidia*
 sudo apt install nvidia-driver-570-open cuda-drivers-570 cuda-12-8
 sudo apt install nvidia-cuda-toolkit
+```
 
 # install updates and reboot
 
