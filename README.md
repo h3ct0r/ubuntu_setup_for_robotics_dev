@@ -1,18 +1,23 @@
-# Ubuntu 22.04 setup for robotics development
+# Ubuntu 24.04 setup for robotics development
 # Tested with: DELL G15 5530
 
 This repo is a group of commands and configurations focused for preparing a fresh Ubuntu installation for robotics and ROS2 development
 
-# Update kernel and Nvidia drivers
+# Update Nvidia drivers BEFORE first login
 
+The default version of Ubuntu 24.04.02 from Feb2025 (https://ubuntu.com/download/desktop) comes with kernel 6.11, which seems to work ok with the G15 5530. However, its impossible to login to Gnome without updating the Nvidia drivers. 
+This configuration worked for me with, including CUDA. 
+
+I recommend opening TTY4 (alt+control+f4), install openssh-sever and then log-in remotely and run all the commands from there:
 ```
-sudo add-apt-repository ppa:damentz/liquorix -y
-sudo apt-get install linux-image-liquorix-amd64 linux-headers-liquorix-amd64 -y
+sudo apt install openssh-server curl
 ```
+
+Then, after login in a remote computer via SSH:
 ```
-curl -fSsL https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/3bf863cc.pub | sudo gpg --dearmor | sudo tee /usr/share/keyrings/nvidia-drivers.gpg > /dev/null 2>&1
+curl -fSsL https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/x86_64/3bf863cc.pub | sudo gpg --dearmor | sudo tee /usr/share/keyrings/nvidia-drivers.gpg > /dev/null 2>&1
 sudo apt install build-essential gcc dirmngr ca-certificates software-properties-common apt-transport-https dkms curl -y
-echo 'deb [signed-by=/usr/share/keyrings/nvidia-drivers.gpg] https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/ /' | sudo tee /etc/apt/sources.list.d/nvidia-drivers.list
+echo 'deb [signed-by=/usr/share/keyrings/nvidia-drivers.gpg] https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/x86_64/ /' | sudo tee /etc/apt/sources.list.d/nvidia-drivers.list
 sudo apt update
 ```
 
@@ -22,26 +27,26 @@ sudo apt install nvidia-driver-570-open cuda-drivers-570 cuda-12-8
 sudo apt install nvidia-cuda-toolkit
 ```
 
-# install updates and reboot
+# Install updates and reboot
 
 ```
-sudo apt update & sudo apt upgrade
-sudo apt autoremove & sudo apt autoclean
+sudo apt update && sudo apt upgrade
+sudo apt autoremove && sudo apt autoclean
 sudo fwupdmgr get-devices
 sudo fwupdmgr get-updates
 sudo fwupdmgr update
 sudo reboot now
 ```
 
-# install basic tools
+# Install basic development/quality-of-life tools
+```
+sudo apt install -y vim cmake build-essential snapd arandr caffeine gparted nautilus-admin git htop ffmpeg keepass2 simplescreenrecorder locate virtualbox gimp inkscape meshlab nmap wireshark handbrake tree openssh-server wget gpg apt-transport-https neofetch
+```
+
+# Install VScode
+A handy and flexible code editor! Compatible with native docker instalations. 
 
 ```
-sudo apt install -y vim cmake build-essential snapd arandr caffeine gparted nautilus-admin git htop ffmpeg keepass2 simplescreenrecorder locate virtualbox gimp inkscape meshlab nmap wireshark handbrake tree openssh-server
-```
-
-# install vscode
-```
-sudo apt-get install wget gpg apt-transport-https
 wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
 sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
 echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" |sudo tee /etc/apt/sources.list.d/vscode.list > /dev/null
@@ -49,52 +54,63 @@ rm -f packages.microsoft.gpg
 sudo apt update && sudo apt install code
 ```
 
-# install and tweak terminator
+# Install and tweak terminator
+Best terminal for multi-tasking in robotics in my opinion!
+
 ```
 sudo apt install terminator
 ```
-- scroll lines 9999999
+Setup terminator profile to define the `scroll lines` to an absurd high number like: 9999999
 
 
-# conky
+# Install Conky
+A light-weight system monitor for X, Wayland, and other things, too. For more info check: https://github.com/brndnmtthws/conky.
+
 ```
-sudo apt install conky -y
+sudo apt install conky-all -y
 mkdir -p ~/.config/conky && conky --print-config > ~/.config/conky/conky.conf
-install minimalistic conky theme: https://www.gnome-look.org/p/1112273/
-add conky to startup programs
-bash -c "sleep 10 && conky"
 ```
+Another steps:
+- install minimalistic conky theme: https://www.gnome-look.org/p/1112273/
+- add conky to startup programs
+- `bash -c "sleep 10 && conky"`
 
-# install teams
+# Install teams
+A necessary evil.
+
 ```
 sudo snap install teams-for-linux
 ```
 
-# install zoom
+# Install zoom
+Another necessary evil.
+
 ```
 cd /tmp && wget https://zoom.us/client/latest/zoom_amd64.deb
 sudo dpkg -i zoom_amd64.deb
 sudo apt -f install
 ```
 
-# install freecad
+# Install Freecad
+Best open source CAD software in my opinion! This PPA has the latest version >= 1.0.
+
 ```
 sudo add-apt-repository ppa:freecad-maintainers/freecad-stable
 sudo apt-get update & apt-get install freecad
 ```
 
-# latex
+# Latex
 ```
 sudo apt install -y texlive texlive-font-utils texlive-pstricks-doc texlive-base texlive-formats-extra texlive-lang-german texlive-metapost texlive-publishers texlive-bibtex-extra texlive-latex-base texlive-metapost-doc texlive-publishers-doc texlive-binaries texlive-latex-base-doc texlive-science texlive-extra-utils texlive-latex-extra texlive-science-doc texlive-fonts-extra texlive-latex-extra-doc texlive-pictures texlive-xetex texlive-fonts-extra-doc texlive-latex-recommended texlive-pictures-doc texlive-fonts-recommended texlive-humanities texlive-lang-english texlive-latex-recommended-doc texlive-fonts-recommended-doc texlive-humanities-doc texlive-luatex texlive-pstricks perl-tk cm-super texstudio
 ```
 
 # Microsoft Fonts
-## Sometimes I get documents which require fonts from Microsoft:
+Sometimes we need to open documents which require fonts from Microsoft:
 ```
 sudo apt install -y ttf-mscorefonts-installer
 ```
 
-# foxit pdf reader
+# Foxit pdf reader
 ```
 cd /tmp && wget https://cdn01.foxitsoftware.com/pub/foxit/reader/desktop/linux/2.x/2.4/en_us/FoxitReader.enu.setup.2.4.4.0911.x64.run.tar.gz
 tar -vzxf  FoxitReader.enu.setup.2.4.4.0911.x64.run.tar.gz
