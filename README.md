@@ -40,7 +40,7 @@ sudo reboot now
 
 # Install basic development/quality-of-life tools
 ```
-sudo apt install -y vim cmake build-essential snapd arandr caffeine gparted nautilus-admin git htop ffmpeg keepass2 simplescreenrecorder locate virtualbox gimp inkscape meshlab nmap wireshark handbrake tree openssh-server wget gpg apt-transport-https neofetch
+sudo apt install -y vim cmake build-essential snapd arandr caffeine gparted nautilus-admin git htop ffmpeg keepass2 simplescreenrecorder locate virtualbox gimp inkscape meshlab nmap wireshark handbrake tree openssh-server wget gpg apt-transport-https neofetch lz4 libxml2-utils qemu-user-static
 ```
 
 # Install VScode
@@ -61,19 +61,6 @@ Best terminal for multi-tasking in robotics in my opinion!
 sudo apt install terminator
 ```
 Setup terminator profile to define the `scroll lines` to an absurd high number like: 9999999
-
-
-# Install Conky
-A light-weight system monitor for X, Wayland, and other things, too. For more info check: https://github.com/brndnmtthws/conky.
-
-```
-sudo apt install conky-all -y
-mkdir -p ~/.config/conky && conky --print-config > ~/.config/conky/conky.conf
-```
-Another steps:
-- install minimalistic conky theme: https://www.gnome-look.org/p/1112273/
-- add conky to startup programs
-- `bash -c "sleep 10 && conky"`
 
 # Install teams
 A necessary evil.
@@ -121,11 +108,9 @@ chmod +x "FoxitReader.enu.setup.2.4.4.0911(r057d814).x64.run"
 # install utilities
 ## dropbox
 ```
-sudo apt install python3-gpg
-cd /tmp && wget https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2020.03.04_amd64.deb
-sudo dpkg -i download\?dl\=packages%2Fubuntu%2Fdropbox_2020.03.04_amd64.deb 
+cd /tmp && wget https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2024.04.17_amd64.deb
+sudo dpkg -i download\?dl\=packages%2Fubuntu%2Fdropbox_2024.04.17_amd64.deb
 sudo apt-get -f install
-sudo apt-key export 5044912E | sudo gpg --dearmour -o /etc/apt/trusted.gpg.d/dropbox.gpg
 ```
 
 # vpn services
@@ -178,8 +163,7 @@ go to keyboard->customize shortcuts->previous track
 
 # Multimedia
 ```
-sudo apt install -y vlc
-sudo apt install -y libavcodec-extra libdvd-pkg; sudo dpkg-reconfigure libdvd-pkg
+sudo apt install -y vlc libavcodec-extra libdvd-pkg; sudo dpkg-reconfigure libdvd-pkg
 ```
 
 # OBS
@@ -234,7 +218,19 @@ echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
   
-  sudo apt update
-  sudo apt install docker-ce docker-compose-plugin
+  sudo apt update && sudo apt install docker-ce docker-compose-plugin
   sudo usermod -aG docker ${USER}
   ```
+
+
+# Install Conky
+A light-weight system monitor for X, Wayland, and other things, too. For more info check: https://github.com/brndnmtthws/conky.
+
+```
+sudo apt install conky-all -y
+mkdir -p ~/.config/conky && conky --print-config > ~/.config/conky/conky.conf
+```
+Another steps:
+- install minimalistic conky theme: https://www.gnome-look.org/p/1112273/
+- add conky to startup programs
+- `bash -c "sleep 10 && conky"`
