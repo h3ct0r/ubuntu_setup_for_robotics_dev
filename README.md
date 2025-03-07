@@ -58,6 +58,28 @@ $ sudo systemctl enable nvidia-hibernate.service
 $ sudo systemctl enable nvidia-resume.service
 ```
 
+##[optional] Update gnome settings for screen sleep and screen dimming
+
+```bash
+$ gsettings set org.gnome.settings-daemon.plugins.power idle-brightness 100
+```
+
+Dump all gnome settings into a file:
+```bash
+$ dconf dump / >~/.config/dconf/user.conf
+```
+
+Then edit them and reload them:
+```
+$ editor ~/.config/dconf/user.conf
+$ dconf load / <~/.config/dconf/user.conf
+```
+
+Disable screen dimming:
+```bash
+$ xset s off && xset -dpms
+```
+
 ## Install updates and reboot
 Get all software and firmware updates and reboot:
 
