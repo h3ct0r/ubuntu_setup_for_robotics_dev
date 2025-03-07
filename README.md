@@ -4,7 +4,7 @@
 This repo is a group of commands and configurations focused for preparing a fresh Ubuntu installation for robotics and ROS2 development.
 
 Things that are **_not_** working properly at the moment:
-- Laptop deep sleep after lid shut (the battery is still drained and the coolers working)
+- _Laptop deep sleep after lid shut (the battery is still drained and the coolers working)_ fixed in the required step.
 
 ## Index
    * [[Required] Update Nvidia drivers to use proprietary driver on first run](#required-update-nvidia-drivers-to-use-proprietary-driver-on-first-run)
@@ -49,6 +49,13 @@ $ sudo apt update
 $ sudo apt purge *nvidia*
 $ sudo apt install nvidia-driver-570-open cuda-drivers-570 cuda-12-8
 $ sudo apt install nvidia-cuda-toolkit
+```
+
+Fix suspend and battery drain when lid shut
+```bash
+$ sudo systemctl enable nvidia-suspend.service
+$ sudo systemctl enable nvidia-hibernate.service
+$ sudo systemctl enable nvidia-resume.service
 ```
 
 ## Install updates and reboot
