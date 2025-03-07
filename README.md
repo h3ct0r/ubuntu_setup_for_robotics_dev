@@ -1,4 +1,4 @@
-# Ubuntu 24.04 setup for Robotics Development
+# Ubuntu 24.04.02 setup for Robotics Development
 ## _Tested with: DELL G15 5530_
 
 This repo is a group of commands and configurations focused for preparing a fresh Ubuntu installation for robotics and ROS2 development.
@@ -8,6 +8,7 @@ Things that are **_not_** working properly at the moment:
 
 ## Index
    * [[Required] Update Nvidia drivers to use proprietary driver on first run](#required-update-nvidia-drivers-to-use-proprietary-driver-on-first-run)
+   * [[Optional] Update gnome settings for screen sleep and screen dimming](#optional-update-gnome-settings-for-screen-sleep-and-screen-dimming)
    * [Install updates and reboot](#install-updates-and-reboot)
    * [Install basic development/quality-of-life tools](#install-basic-developmentquality-of-life-tools)
    * [Install VScode](#install-vscode)
@@ -58,7 +59,7 @@ $ sudo systemctl enable nvidia-hibernate.service
 $ sudo systemctl enable nvidia-resume.service
 ```
 
-## [optional] Update gnome settings for screen sleep and screen dimming
+## [Optional] Update gnome settings for screen sleep and screen dimming
 
 ```bash
 $ gsettings set org.gnome.settings-daemon.plugins.power idle-brightness 100
