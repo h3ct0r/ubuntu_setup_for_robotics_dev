@@ -4,7 +4,7 @@
 This repo is a group of commands and configurations focused for preparing a fresh Ubuntu installation for robotics and ROS2 development.
 
 Things that are **_not_** working properly at the moment:
-- _Laptop deep sleep after lid shut (the battery is still drained and the coolers working)_ fixed in the required step.
+- ~~Laptop deep sleep after lid shut (the battery is still drained and the coolers working)~~ Fixed in the required nvidia step.
 
 ## Index
    * [[Required] Update Nvidia drivers to use proprietary driver on first run](#required-update-nvidia-drivers-to-use-proprietary-driver-on-first-run)
