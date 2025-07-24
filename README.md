@@ -271,6 +271,23 @@ sudo apt update && sudo apt install docker-ce docker-compose-plugin
 sudo usermod -aG docker ${USER}
 ```
 
+### NVIDIA Container Toolkit
+```
+curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
+  && curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | \
+    sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
+    sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
+
+sudo apt-get update
+echo  'export NVIDIA_CONTAINER_TOOLKIT_VERSION=1.17.8-1' >> ~/.zshrc
+source ~/.zshrc
+sudo apt-get install -y \
+      nvidia-container-toolkit=${NVIDIA_CONTAINER_TOOLKIT_VERSION} \
+      nvidia-container-toolkit-base=${NVIDIA_CONTAINER_TOOLKIT_VERSION} \
+      libnvidia-container-tools=${NVIDIA_CONTAINER_TOOLKIT_VERSION} \
+      libnvidia-container1=${NVIDIA_CONTAINER_TOOLKIT_VERSION}
+```
+
 ## Install ROS2 Jazzy
 
 Please follow the tutorial here: https://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debs.html
