@@ -81,6 +81,18 @@ Disable screen dimming:
 xset s off && xset -dpms
 ```
 
+## Fix delay in dimming using the keyboard buttons
+
+From: https://www.reddit.com/r/gnome/comments/84453o/delayfreezecpu_spike_when_using_the_functionmedia/
+```
+sudo nano /usr/share/X11/xkb/symbols/br
+```
+
+Then comment this line:
+```
+modifier_map Mod3 { Scroll_Lock };
+```
+
 ## Install updates and reboot
 Get all software and firmware updates and reboot:
 
